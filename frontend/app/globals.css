@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+  
+  .sound-wave {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .bar {
+    animation-name: wave-lg;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    animation-direction: alternate;
+    background: #f32968; /* Change the color for the bars */
+    margin: 0 1.5px;
+    height: 10px;
+    width: 1px; /* Change the number for the bar width */
+    animation-play-state: paused; /* Initially paused */
+  }
+  
+  .bar:nth-child(-n + 7),
+  .bar:nth-last-child(-n + 7) {
+    animation-name: wave-md;
+  }
+  
+  .bar:nth-child(-n + 3),
+  .bar:nth-last-child(-n + 3) {
+    animation-name: wave-sm;
+  }
+  
+  @keyframes wave-sm {
+    0% {
+      opacity: 0.35;
+      height: 10px;
+    }
+    100% {
+      opacity: 1;
+      height: 25px;
+    }
+  }
+  
+  @keyframes wave-md {
+    0% {
+      opacity: 0.35;
+      height: 15px;
+    }
+    100% {
+      opacity: 1;
+      height: 50px;
+    }
+  }
+  
+  @keyframes wave-lg {
+    0% {
+      opacity: 0.35;
+      height: 15px;
+    }
+    100% {
+      opacity: 1;
+      height: 70px;
+    }
+  }
+  
+  @layer base {
+  :root {
+        --radius: 0.5rem;
+    }
+}
+
+@keyframes hoverEffect {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-3.5px);
+  }
+}
+
+.hover-animation {
+  animation: hoverEffect 1.4s infinite alternate ease-in-out;
+}
