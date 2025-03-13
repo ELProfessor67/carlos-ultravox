@@ -7,7 +7,7 @@ export class AudioStreamer {
     audioQueue = []
     isPlaying = false
     sampleRate = 8000
-    bufferSize = 8000
+    bufferSize = 320
     processingBuffer = new Float32Array(0)
     scheduledTime = 0
     isStreamComplete = false
@@ -76,12 +76,13 @@ export class AudioStreamer {
         newBuffer.set(this.processingBuffer)
         newBuffer.set(float32Array, this.processingBuffer.length)
         this.processingBuffer = newBuffer
-
+        
         while (this.processingBuffer.length >= this.bufferSize) {
             const buffer = this.processingBuffer.slice(0, this.bufferSize)
             this.audioQueue.push(buffer)
             this.processingBuffer = this.processingBuffer.slice(this.bufferSize)
         }
+        
 
         if (!this.isPlaying) {
             this.isPlaying = true
@@ -91,6 +92,7 @@ export class AudioStreamer {
             this.scheduleNextBuffer()
         }
     }
+
 
     createAudioBuffer(audioData) {
         const audioBuffer = this.context.createBuffer(
@@ -103,7 +105,7 @@ export class AudioStreamer {
     }
 
 
-    
+   
 
     scheduleNextBuffer() {
         const SCHEDULE_AHEAD_TIME = 0.3
@@ -155,7 +157,7 @@ export class AudioStreamer {
             // i added this trying to fix clicks
             this.gainNode.gain.setValueAtTime(0, 0);
             this.gainNode.gain.linearRampToValueAtTime(1, 1);
-
+            
             // Ensure we never schedule in the past
             const startTime = Math.max(this.scheduledTime, this.context.currentTime)
             source.start(startTime)

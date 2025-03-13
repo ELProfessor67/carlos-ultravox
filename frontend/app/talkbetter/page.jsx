@@ -91,6 +91,7 @@ const App = () => {
 
           const base64Audio = data.media.payload;
           const buffer = base64ToArrayBuffer(base64Audio);
+          console.log(buffer.byteLength)
           audioStreamerRef.current?.addPCM16(new Uint8Array(buffer));
           break;
       }

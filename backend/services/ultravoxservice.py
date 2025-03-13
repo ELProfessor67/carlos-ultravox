@@ -5,7 +5,7 @@ import requests
 ULTRAVOX_MODEL         = "fixie-ai/ultravox-70B"
 ULTRAVOX_VOICE         = "Mark" #"Tanya-English"   # or “Mark”
 ULTRAVOX_SAMPLE_RATE   = 8000        
-ULTRAVOX_BUFFER_SIZE   = 60   
+ULTRAVOX_BUFFER_SIZE   = 80   
 
 #
 # Helper: Create an Ultravox serverWebSocket call
